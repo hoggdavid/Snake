@@ -15,7 +15,13 @@ public class AI implements Comparable<AI>{
 	
 	public static void addNeuron(Neuron[] Neurons, int anzahl){
 		for (int i=0;i<anzahl;i++){
-			Neurons[anzahl] = new Neuron();
+			Neurons[i] = new Neuron();
+		}
+	}
+	
+	public static void addLayer(NeuronLayer[] Layers, int anzahl){
+		for (int i=0;i<anzahl;i++){
+			Layers[i] = new NeuronLayer();
 		}
 	}
 	
@@ -57,29 +63,14 @@ public class AI implements Comparable<AI>{
 	
 	public void initialize(){
 		
-		int in, hid, out;
+		int in, hid, out, layer;
 		in = 100;
 		hid = 5;
 		out = 4;
+		layer = 3;
 		
 		//Error in AI.java:81 (initialize) & in GameCopy.java:108
 		//list-problem or another mistake as the cause for the error?
-		
-		/*InputNeurons = new Neuron[100];{
-				for (in=0;in<100;in++){
-					new Neuron();
-				}
-		};
-		HiddenNeurons = new Neuron[5];{
-				for (hid=0;hid<5;hid++){
-					new Neuron();
-				}
-		};
-		OutputNeurons = new Neuron[4];{
-			for (out=0;out<4;out++){
-				new Neuron();
-			}
-		};*/
 		
 		InputNeurons = new Neuron[in];
 		addNeuron(InputNeurons, in);
@@ -87,6 +78,9 @@ public class AI implements Comparable<AI>{
 		addNeuron(HiddenNeurons, hid);
 		OutputNeurons = new Neuron[out];
 		addNeuron(OutputNeurons, out);
+		
+		Layers = new NeuronLayer[layer];
+		addLayer(Layers, layer);
 		
 		// CONNECTING
 		for (hid=0;hid<5;hid++){

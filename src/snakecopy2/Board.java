@@ -55,11 +55,11 @@ public class Board extends JPanel implements ActionListener {
 
 	public Board() {
 
-	    addKeyListener(new Keys());
+	    /*addKeyListener(new Keys());
 	    setBackground(Color.pink);
 	    setFocusable(true);
 
-	    setPreferredSize(new Dimension(BOARDWIDTH, BOARDHEIGHT));
+	    setPreferredSize(new Dimension(BOARDWIDTH, BOARDHEIGHT));*/
 
 	    initializeGame();
 	}
@@ -115,6 +115,9 @@ public class Board extends JPanel implements ActionListener {
 	    }
 	    // Start off our snake moving right
 	    snake.setMovingRight(true);
+	    snake.move();
+	    snake.move();
+	    snake.move();
 
 	    // Generate our first 'food'
 	    food.createFood();
@@ -217,8 +220,8 @@ public class Board extends JPanel implements ActionListener {
 	    if (inGame == true) {
 
 	        checkFoodCollisions();
-	        checkCollisions();
 	        snake.move();
+	        checkCollisions();
 	        }
 	    
 	    totaltime = totaltime + timeperiod;
