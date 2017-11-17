@@ -5,13 +5,13 @@ import snakecopy2.NeuronLayer;
 public class AI implements Comparable<AI>{
 	
 	public int score;
-	public double  mutationConst;
+	public double  mutationConst = 0.32;
 	public Neuron[] InputNeurons;
-	//public static Neuron[] InputNeurons; ???
 	public Neuron[] HiddenNeurons;
 	public Neuron[] OutputNeurons;
-	// public static Neuron[] OutputNeurons; ???
 	public NeuronLayer[] Layers;
+	
+	public int generation;
 	
 	public static void addNeuron(Neuron[] Neurons, int anzahl){
 		for (int i=0;i<anzahl;i++){
@@ -32,6 +32,11 @@ public class AI implements Comparable<AI>{
 					double w = Layers[i].Neurons.get(j).Weights.get(k);
 					w = w + mutationConst * (Math.random()*2-1);
 					Layers[i].Neurons.get(j).Weights.set(k, w);
+					
+	// lower mutationConstant if present generationScore is higher than predecessors generationScore
+	// otherwise increase the mutationConstant
+	// int generation; w void getGen and getTotal it could work
+					
 				}
 			}
 		}
@@ -69,9 +74,6 @@ public class AI implements Comparable<AI>{
 		out = 4;
 		layer = 3;
 		
-		//Error in AI.java:81 (initialize) & in GameCopy.java:108
-		//list-problem or another mistake as the cause for the error?
-		
 		InputNeurons = new Neuron[in];
 		addNeuron(InputNeurons, in);
 		HiddenNeurons = new Neuron[hid];
@@ -83,24 +85,24 @@ public class AI implements Comparable<AI>{
 		addLayer(Layers, layer);
 		
 		// CONNECTING
-		for (hid=0;hid<5;hid++){
-			for (in=0;in<100;in++){
-				HiddenNeurons[hid].connectTo(InputNeurons[in], 2*Math.random()-1.0);
+		for (int hidden=0;hidden<5;hidden++){
+			for (int inner=0;inner<100;inner++){
+				HiddenNeurons[hidden].connectTo(InputNeurons[inner], 2*Math.random()-1.0);
 			}
 			
-			Layers[1].addNeuron(HiddenNeurons[hid]);
+			Layers[1].addNeuron(HiddenNeurons[hidden]);
 			
-			for (out=0;out<4;out++){
-				OutputNeurons[out].connectTo(HiddenNeurons[hid], 2*Math.random()-1.0);
+			for (int outer=0;outer<4;outer++){
+				OutputNeurons[outer].connectTo(HiddenNeurons[hidden], 2*Math.random()-1.0);
 			}
 		}
 		
-		for (in=0;in<100;in++){
-			Layers[0].addNeuron(InputNeurons[in]);
+		for (int inner=0;inner<100;inner++){
+			Layers[0].addNeuron(InputNeurons[inner]);
 		}
 		
-		for (out=0;out<4;out++){
-			Layers[2].addNeuron(OutputNeurons[out]);
+		for (int outer=0;outer<4;outer++){
+			Layers[2].addNeuron(OutputNeurons[outer]);
 		}
 	}
 }

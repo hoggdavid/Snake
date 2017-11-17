@@ -19,13 +19,21 @@ public class GameCopy extends JFrame{
 	public static int[] scores;
 	
 	GameCopy() {
-	    // GRAFIK
+	    // G R A F I K
 		//myBoard = new Board();
 	    setResizable(false);
 	    pack();
 	    setTitle("Snake");
 	    setLocationRelativeTo(null);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	public void getTotalscore (int generation){
+		
+	}
+	
+	public int getGeneration (int generation){
+		return generation;
 	}
 	
 	public void letPlay(int u){
@@ -57,7 +65,9 @@ public class GameCopy extends JFrame{
         	individual.setInput(myBoard.food.getFoodY()*10 + myBoard.food.getFoodX(), 1);
         	
         	 for (int k=myBoard.snake.getJoints(); k>0;k--) {
-        		 /*System.out.println(myBoard.inGame);
+        		 
+        		 /* D E B U G
+        		  * System.out.println(myBoard.inGame);
         		 System.out.println("Y"+k+" "+myBoard.snake.getSnakeY(k));
         		 System.out.println("X"+k+" "+myBoard.snake.getSnakeX(k));*/
         		 
@@ -117,14 +127,16 @@ public class GameCopy extends JFrame{
 		for (int a=0;a<100;a++){
 		
 			myBoard = new Board();
-		   	 /*for (int k=myBoard.snake.getJoints(); k>0;k--) {
+		   	 
+			/* D E B U G
+			 * for (int k=myBoard.snake.getJoints(); k>0;k--) {
 		   		 
 		   		 System.out.println("Y "+myBoard.snake.getSnakeY(k));
 		   		 System.out.println("X "+myBoard.snake.getSnakeX(k));
 		   		 System.out.println("-----------------------------");
 		   	 }*/
 			
-		/*	GRAFIK
+		/*	G R A F I K
 	    EventQueue.invokeLater(new Runnable() {
 	    	
 	        public void run() {
@@ -132,6 +144,7 @@ public class GameCopy extends JFrame{
 	            frame.setVisible(true);
 	        }
 	    });*/
+			
 	    int moves = 0;
 	    while ((myBoard.inGame==true)){
 	    	oneStep(a);
@@ -142,14 +155,36 @@ public class GameCopy extends JFrame{
 	    } 
 	    
 	    individuals.get(a).setScore(myBoard.getScore());
-	    /*System.out.println("gen"+x+" ind "+a+" scr "+myBoard.getScore());*/
+	    
+	    /* D E B U G (score individual)
+	    System.out.println("gen"+x+" ind "+a+" scr "+myBoard.getScore());*/
+	    
+	    /* D E B U G (output individual 0)
+	    int oh;
+		if (a==0){
+			for (oh=0;oh<4;oh++){
+				System.out.println(individuals.get(0).getOutput(oh));
+			}
+		}*/
+	    
+	    /* D E B U G (mutation, weights)
+	    int oh;
+		if ((a==0) && (x<3)){
+			for (oh=0;oh<4;oh++){
+				System.out.println(individuals.get(0).Layers[2].Neurons.get(oh).Weights);
+				System.out.println(individual.mutationConst);
+			}
+		}*/
 	    
 	}
 		int totalscore=0;
 		for (int k=0;k<100;k++){
 			totalscore += individuals.get(k).score;
 		}
+		
+		// D E B U G (generation score)
 		System.out.println("gen "+x+" total "+totalscore);
+		
 		//Genetic Algorithm
 		Collections.sort(individuals);
 		LinkedList<AI> newGen = new LinkedList<AI>();
@@ -157,7 +192,7 @@ public class GameCopy extends JFrame{
 		for (int o=0;o<13;o++){
 			for (int z=13;z>o;z--){
 				newGen.add(individuals.get(o));
-				//individuals nr.0/90
+				//individuals 0/90 
 			}
 		}
 		
@@ -165,7 +200,7 @@ public class GameCopy extends JFrame{
 			individual = new AI();
 			individual.initialize();
 			newGen.add(individual);
-			//individuals 91/99
+			//individuals 91/99 
 		}
 		
 		int j = 1;
@@ -173,7 +208,7 @@ public class GameCopy extends JFrame{
 		int jPlus = 13;
 		int kPlus = 12;
 		
-		// RANDOMIZE
+		// R A N D O M I Z E
 		for (int l=0;l<12;l++){
 
 			for (int r=j;r<k;r++){
@@ -186,7 +221,7 @@ public class GameCopy extends JFrame{
 			kPlus = kPlus -1;
 		}
 		
-		if (x==9900){
+		if (x==9999){
 			for (int layer=1;layer<3;layer++){
 				for (int n=0;n<newGen.get(0).Layers[layer].Neurons.size();n++){
 					
