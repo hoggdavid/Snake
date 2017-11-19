@@ -13,10 +13,12 @@ import javax.swing.JFrame;
 public class GameCopy extends JFrame{
 
 	public static AI individual;
-	//public static ArrayList<AI> individuals;
 	public static LinkedList<AI> individuals = new LinkedList<AI>();
 	public static Board myBoard;
 	public static int[] scores;
+	
+	public boolean randomizeFunction;
+	public ArrayList<Double> weightsBefore;
 	
 	GameCopy() {
 	    // G R A F I K
@@ -66,13 +68,14 @@ public class GameCopy extends JFrame{
         	
         	 for (int k=myBoard.snake.getJoints(); k>0;k--) {
         		 
-        		 /* D E B U G
+/* D E B U G (Snake x/y location)
         		  * System.out.println(myBoard.inGame);
         		 System.out.println("Y"+k+" "+myBoard.snake.getSnakeY(k));
         		 System.out.println("X"+k+" "+myBoard.snake.getSnakeX(k));*/
         		 
         		 individual.setInput(myBoard.snake.getSnakeY(k)* 10 + myBoard.snake.getSnakeX(k), -1);
         	 }
+        	 
         	 // EVALUATE OUTPUT ANN
         	 individual.Layers[1].updateLayer();
         	 individual.Layers[2].updateLayer();
@@ -82,6 +85,7 @@ public class GameCopy extends JFrame{
         	 double outputDown = individual.getOutput(1);
         	 double outputLeft = individual.getOutput(2);
         	 double outputRight = individual.getOutput(3);
+        	 
         	 //(!snake.isMovingDown())
         	 
         	 if ((outputUp>outputDown)&&(outputUp>outputLeft)&&(outputUp>outputRight)){
@@ -128,7 +132,7 @@ public class GameCopy extends JFrame{
 		
 			myBoard = new Board();
 		   	 
-			/* D E B U G
+/* D E B U G (Snake x/y location)
 			 * for (int k=myBoard.snake.getJoints(); k>0;k--) {
 		   		 
 		   		 System.out.println("Y "+myBoard.snake.getSnakeY(k));
@@ -156,10 +160,12 @@ public class GameCopy extends JFrame{
 	    
 	    individuals.get(a).setScore(myBoard.getScore());
 	    
-	    /* D E B U G (score individual)
+	    
+/* D E B U G (score individual)
 	    System.out.println("gen"+x+" ind "+a+" scr "+myBoard.getScore());*/
 	    
-	    /* D E B U G (output individual 0)
+	    
+/* D E B U G (output individual 0)
 	    int oh;
 		if (a==0){
 			for (oh=0;oh<4;oh++){
@@ -167,7 +173,8 @@ public class GameCopy extends JFrame{
 			}
 		}*/
 	    
-	    /* D E B U G (mutation, weights)
+	    
+/* D E B U G (mutation, weights)
 	    int oh;
 		if ((a==0) && (x<3)){
 			for (oh=0;oh<4;oh++){
@@ -182,7 +189,7 @@ public class GameCopy extends JFrame{
 			totalscore += individuals.get(k).score;
 		}
 		
-		// D E B U G (generation score)
+// D E B U G (generation score)
 		System.out.println("gen "+x+" total "+totalscore);
 		
 		//Genetic Algorithm
@@ -203,12 +210,15 @@ public class GameCopy extends JFrame{
 			//individuals 91/99 
 		}
 		
+/* D E B U G (1/ randomize control)
+		System.out.println(individuals.get(0).Layers[2].Neurons.get(0).Weights);*/
+		
+		// R A N D O M I Z E
 		int j = 1;
 		int k = 13;
 		int jPlus = 13;
 		int kPlus = 12;
-		
-		// R A N D O M I Z E
+	
 		for (int l=0;l<12;l++){
 
 			for (int r=j;r<k;r++){
@@ -220,6 +230,9 @@ public class GameCopy extends JFrame{
 			jPlus = jPlus -1;
 			kPlus = kPlus -1;
 		}
+		
+/* D E B U G (2/ randomize control)
+		System.out.println(individuals.get(1).Layers[2].Neurons.get(0).Weights);*/
 		
 		if (x==9999){
 			for (int layer=1;layer<3;layer++){

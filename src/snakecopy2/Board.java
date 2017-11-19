@@ -177,7 +177,7 @@ public class Board extends JPanel implements ActionListener {
 	}
 	
 	public int getScore(){
-		int score = snake.getJoints();
+		int score = snake.getJoints()-3;
 		return score;
 	}
 	

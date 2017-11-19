@@ -5,13 +5,14 @@ import snakecopy2.NeuronLayer;
 public class AI implements Comparable<AI>{
 	
 	public int score;
-	public double  mutationConst = 0.32;
+	public double  mutationConst = 0.28;
 	public Neuron[] InputNeurons;
 	public Neuron[] HiddenNeurons;
 	public Neuron[] OutputNeurons;
 	public NeuronLayer[] Layers;
 	
 	public int generation;
+	public boolean why;
 	
 	public static void addNeuron(Neuron[] Neurons, int anzahl){
 		for (int i=0;i<anzahl;i++){
@@ -30,7 +31,24 @@ public class AI implements Comparable<AI>{
 			for (int j=0;j<Layers[i].Neurons.size();j++){
 				for (int k=0;k<Layers[i].Neurons.get(j).Weights.size();k++){
 					double w = Layers[i].Neurons.get(j).Weights.get(k);
+					
+					// 			1 (favorite)
 					w = w + mutationConst * (Math.random()*2-1);
+					
+					/*			2
+					if (Math.random()*1>=0.5){
+						why = true;
+					}
+					if (Math.random()*1<0.5){
+						why = false;
+					}
+					if (why==true){
+						w = w + (mutationConst*Math.random());
+					}
+					if (why==false){
+						w = w - (mutationConst*Math.random());
+					}*/
+					
 					Layers[i].Neurons.get(j).Weights.set(k, w);
 					
 	// lower mutationConstant if present generationScore is higher than predecessors generationScore
