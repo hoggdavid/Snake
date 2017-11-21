@@ -5,7 +5,7 @@ import snakecopy2.NeuronLayer;
 public class AI implements Comparable<AI>{
 	
 	public int score;
-	public double  mutationConst = 0.28;
+	public double  mutationConst = 0.22;
 	public Neuron[] InputNeurons;
 	public Neuron[] HiddenNeurons;
 	public Neuron[] OutputNeurons;

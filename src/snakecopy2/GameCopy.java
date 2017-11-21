@@ -161,9 +161,20 @@ public class GameCopy extends JFrame{
 	    individuals.get(a).setScore(myBoard.getScore());
 	    
 	    
-/* D E B U G (score individual)
-	    System.out.println("gen"+x+" ind "+a+" scr "+myBoard.getScore());*/
-	    
+// D E B U G (score individual) (score)
+	    if ((x<5000) && (4996<x)){
+	    	if (a==0){
+	    		System.out.println("Scores:");
+	    		System.out.println(x + "-1st" + myBoard.getScore());
+	    	}
+	    	if (a==13){
+	    		System.out.println(x + "-2nd" + myBoard.getScore());
+	    	}
+	    	if (a==25){
+	    		System.out.println(x + "-3rd" + myBoard.getScore());
+	    		System.out.println("--------------------------------");
+	    	}
+	    }
 	    
 /* D E B U G (output individual 0)
 	    int oh;
@@ -173,24 +184,36 @@ public class GameCopy extends JFrame{
 			}
 		}*/
 	    
-	    
-/* D E B U G (mutation, weights)
-	    int oh;
-		if ((a==0) && (x<3)){
-			for (oh=0;oh<4;oh++){
-				System.out.println(individuals.get(0).Layers[2].Neurons.get(oh).Weights);
-				System.out.println(individual.mutationConst);
-			}
-		}*/
-	    
 	}
+		
+// D E B U G (mutation, weights) (weights before sort)
+	    
+				if ((x<5000)&&(4996<x)){
+						System.out.println("Before sort:");
+						System.out.println("1st--");
+						for (int oh=0;oh<4;oh++){
+							System.out.println(individuals.get(0).Layers[2].Neurons.get(oh).Weights);
+						}
+						System.out.println("2nd--");
+						for (int oh=0;oh<4;oh++){
+							System.out.println(individuals.get(13).Layers[2].Neurons.get(oh).Weights);
+							//System.out.println(individual.mutationConst);
+						}
+						System.out.println("3rd--");
+						for (int oh=0;oh<4;oh++){
+							System.out.println(individuals.get(25).Layers[2].Neurons.get(oh).Weights);
+							//System.out.println(individual.mutationConst);
+						}
+						System.out.println("----------------------------------");
+					}
+				
 		int totalscore=0;
 		for (int k=0;k<100;k++){
 			totalscore += individuals.get(k).score;
 		}
 		
-// D E B U G (generation score)
-		System.out.println("gen "+x+" total "+totalscore);
+/* D E B U G (generation score)
+		System.out.println("gen "+x+" total "+totalscore);*/
 		
 		//Genetic Algorithm
 		Collections.sort(individuals);
@@ -210,8 +233,27 @@ public class GameCopy extends JFrame{
 			//individuals 91/99 
 		}
 		
-/* D E B U G (1/ randomize control)
-		System.out.println(individuals.get(0).Layers[2].Neurons.get(0).Weights);*/
+// D E B U G (1/ randomize control) (sort control)
+		
+		if ((x<5000)&&(4996<x)){
+			System.out.println("After sort / Before randomize:");
+			System.out.println("1st--");
+			for (int oh=0;oh<4;oh++){
+				System.out.println(individuals.get(0).Layers[2].Neurons.get(oh).Weights);
+				//System.out.println(individual.mutationConst);
+			}
+			System.out.println("2nd--");
+			for (int oh=0;oh<4;oh++){
+				System.out.println(individuals.get(13).Layers[2].Neurons.get(oh).Weights);
+				//System.out.println(individual.mutationConst);
+			}
+			System.out.println("3rd--");
+			for (int oh=0;oh<4;oh++){
+				System.out.println(individuals.get(25).Layers[2].Neurons.get(oh).Weights);
+				//System.out.println(individual.mutationConst);
+			}
+			System.out.println("----------------------------------");
+		}
 		
 		// R A N D O M I Z E
 		int j = 1;
@@ -231,8 +273,27 @@ public class GameCopy extends JFrame{
 			kPlus = kPlus -1;
 		}
 		
-/* D E B U G (2/ randomize control)
-		System.out.println(individuals.get(1).Layers[2].Neurons.get(0).Weights);*/
+// D E B U G (2/ randomize control)
+		
+		if ((x<5000)&&(4996<x)){
+			System.out.println("After randomize:");
+			System.out.println("1st--");
+			for (int oh=0;oh<4;oh++){
+				System.out.println(individuals.get(0).Layers[2].Neurons.get(oh).Weights);
+				//System.out.println(individual.mutationConst);
+			}
+			System.out.println("2nd--");
+			for (int oh=0;oh<4;oh++){
+				System.out.println(individuals.get(13).Layers[2].Neurons.get(oh).Weights);
+				//System.out.println(individual.mutationConst);
+			}
+			System.out.println("3rd--");
+			for (int oh=0;oh<4;oh++){
+				System.out.println(individuals.get(25).Layers[2].Neurons.get(oh).Weights);
+				//System.out.println(individual.mutationConst);
+			}
+			System.out.println("--------------------------------");
+		}
 		
 		if (x==9999){
 			for (int layer=1;layer<3;layer++){
@@ -254,7 +315,6 @@ public class GameCopy extends JFrame{
 		}
 	}		
 }
-	
 }
 
 //Board change game over and initGame()
