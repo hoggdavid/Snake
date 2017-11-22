@@ -43,7 +43,9 @@ public class Neuron {
 			input += Weights.get(i)*Predecessors.get(i).getOutput();
 		}
 		// calculate output
-		output = input;
+		output = 1/(1+Math.exp(-input));
+		
+		//dumb neuron
 	}
 	
 }

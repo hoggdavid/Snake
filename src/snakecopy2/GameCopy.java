@@ -47,7 +47,7 @@ public class GameCopy extends JFrame{
 		  BufferedWriter outputWriter = null;
 		  outputWriter = new BufferedWriter(new FileWriter(filename));
 		  for (int i = 0; i < p.size(); i++) {
-		    outputWriter.write(Integer.toString((i)));
+		    outputWriter.write(Double.toString((p.get(i))));
 		    outputWriter.newLine();
 		  }
 		  outputWriter.flush();  
@@ -161,7 +161,7 @@ public class GameCopy extends JFrame{
 	    individuals.get(a).setScore(myBoard.getScore());
 	    
 	    
-// D E B U G (score individual) (score)
+/* D E B U G (score individual) (score)
 	    if ((x<5000) && (4996<x)){
 	    	if (a==0){
 	    		System.out.println("Scores:");
@@ -174,7 +174,7 @@ public class GameCopy extends JFrame{
 	    		System.out.println(x + "-3rd" + myBoard.getScore());
 	    		System.out.println("--------------------------------");
 	    	}
-	    }
+	    }*/
 	    
 /* D E B U G (output individual 0)
 	    int oh;
@@ -186,7 +186,7 @@ public class GameCopy extends JFrame{
 	    
 	}
 		
-// D E B U G (mutation, weights) (weights before sort)
+/* D E B U G (mutation, weights) (weights before sort)
 	    
 				if ((x<5000)&&(4996<x)){
 						System.out.println("Before sort:");
@@ -205,15 +205,15 @@ public class GameCopy extends JFrame{
 							//System.out.println(individual.mutationConst);
 						}
 						System.out.println("----------------------------------");
-					}
+					}*/
 				
 		int totalscore=0;
 		for (int k=0;k<100;k++){
 			totalscore += individuals.get(k).score;
 		}
 		
-/* D E B U G (generation score)
-		System.out.println("gen "+x+" total "+totalscore);*/
+// D E B U G (generation score)
+		System.out.println("gen "+x+" total "+totalscore);
 		
 		//Genetic Algorithm
 		Collections.sort(individuals);
@@ -233,7 +233,7 @@ public class GameCopy extends JFrame{
 			//individuals 91/99 
 		}
 		
-// D E B U G (1/ randomize control) (sort control)
+/* D E B U G (1/ randomize control) (sort control)
 		
 		if ((x<5000)&&(4996<x)){
 			System.out.println("After sort / Before randomize:");
@@ -253,7 +253,7 @@ public class GameCopy extends JFrame{
 				//System.out.println(individual.mutationConst);
 			}
 			System.out.println("----------------------------------");
-		}
+		}*/
 		
 		// R A N D O M I Z E
 		int j = 1;
@@ -273,7 +273,7 @@ public class GameCopy extends JFrame{
 			kPlus = kPlus -1;
 		}
 		
-// D E B U G (2/ randomize control)
+/* D E B U G (2/ randomize control)
 		
 		if ((x<5000)&&(4996<x)){
 			System.out.println("After randomize:");
@@ -293,19 +293,20 @@ public class GameCopy extends JFrame{
 				//System.out.println(individual.mutationConst);
 			}
 			System.out.println("--------------------------------");
-		}
+		}*/
 		
-		if (x==9999){
+		if (x==9){
 			for (int layer=1;layer<3;layer++){
 				for (int n=0;n<newGen.get(0).Layers[layer].Neurons.size();n++){
 					
-					final ArrayList<Double>FinalWeights;
+					ArrayList<Double>FinalWeights;
 					FinalWeights = new ArrayList<Double>();
 					for (int w=0;w<newGen.get(0).Layers[layer].Neurons.get(n).Weights.size();w++){
 						FinalWeights.add(newGen.get(0).Layers[layer].Neurons.get(n).Weights.get(w));
 					}
 					try {
 						GameCopy.write("AI_gen("+x+")_layer("+layer+")_neuron("+n+")", FinalWeights);
+						System.out.println(FinalWeights);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
