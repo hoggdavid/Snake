@@ -8,7 +8,6 @@ public class Neuron {
 	public ArrayList<Double> Weights;
 	public double output;
 	public double input;
-	//public int schwelle;
 	
 	public Neuron(){
 		Predecessors = new ArrayList<Neuron>();

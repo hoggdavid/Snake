@@ -76,6 +76,8 @@ public class GameCopy extends JFrame{
         		 individual.setInput(myBoard.snake.getSnakeY(k)* 10 + myBoard.snake.getSnakeX(k), -1);
         	 }
         	 
+        	 //individual.setInput(myBoard.snake.getSnakeY(0)* 10 + myBoard.snake.getSnakeX(0), -2);
+        	 
         	 // EVALUATE OUTPUT ANN
         	 individual.Layers[1].updateLayer();
         	 individual.Layers[2].updateLayer();
@@ -126,7 +128,7 @@ public class GameCopy extends JFrame{
 			individual.initialize();
 			individuals.add(individual);
 		}
-		for (int x=0;x<10000;x++){
+		for (int x=0;x<180000;x++){
 	
 		for (int a=0;a<100;a++){
 		
@@ -295,7 +297,7 @@ public class GameCopy extends JFrame{
 			System.out.println("--------------------------------");
 		}*/
 		
-		if (x==9){
+		if (x==17999){
 			for (int layer=1;layer<3;layer++){
 				for (int n=0;n<newGen.get(0).Layers[layer].Neurons.size();n++){
 					
