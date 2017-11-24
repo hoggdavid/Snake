@@ -3,19 +3,38 @@ package snakecopy2;
 public class Food {
 
 	private Snake snake = new Snake();
+	private GameCopy game = new GameCopy();
 	private int foodX; // Stores X pos of our food
 	private int foodY; // Stores Y pos of our food
+	public int[] patternX;
+	public int[] patternY;
+	
+	public void addPattern(int[] pattern, int value, int place){
+		pattern[place] = value;
+	}
 
+	public void createPattern(){
+		
+		/*patternX = new int[game.getMaxMoves()];
+		patternY = new int[game.getMaxMoves()];*/
+		
+		for (int loop=0;loop<game.getMaxMoves();loop++){
+			
+			int locationX = (int) (Math.random() * Board.getBoardWidthVirt());
+			addPattern(patternX, locationX, loop);
+		    //patternX[loop] = locationX;
+		    int locationY = (int) (Math.random() * Board.getBoardHeightVirt());
+		    addPattern(patternY, locationY, loop);
+		    //patternY[loop] = locationY;
+		    
+		}
+	}
+	
 	public void createFood() {
-
-	    // Set our food's x & y position to a random position
-
-	    int location = (int) (Math.random() * Board.getBoardWidthVirt());
-	    foodX = location ;
-
-	    location = (int) (Math.random() * Board.getBoardHeightVirt());
-	    foodY = location;
-
+			//snake.setJoints(3);
+			foodX = patternX[snake.getJoints()-3];
+	    	foodY = patternY[snake.getJoints()-3];
+	    	
 	    for (int i = 0; i<snake.getJoints();i++){
 	    	
 	    	if ((foodX == snake.getSnakeX(i)) && (foodY == snake.getSnakeY(i))) {
@@ -23,7 +42,6 @@ public class Food {
 		    }
 	    	
 	    }
-	    
 	}
 
 	public int getFoodX() {

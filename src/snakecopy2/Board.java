@@ -106,7 +106,10 @@ public class Board extends JPanel implements ActionListener {
 	    
 		totaltime = 0;
 		turns = 0;
-		snake.setJoints(3); // set our snake's initial size
+	    food.createPattern();
+	    snake.setJoints(3);
+	    food.createFood(); 
+		//snake.setJoints(3); 
 
 	    // Create our snake's body
 	    for (int i = 0; i < snake.getJoints(); i++) {
@@ -119,8 +122,7 @@ public class Board extends JPanel implements ActionListener {
 	    snake.move();
 	    snake.move();
 
-	    // Generate our first 'food'
-	    food.createFood();
+// CHANGED
 
 	    // set the timer to record our game's speed / make the game move
 	    timer = new Timer(timeperiod, this);

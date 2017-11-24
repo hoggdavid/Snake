@@ -16,6 +16,10 @@ public class GameCopy extends JFrame{
 	public static LinkedList<AI> individuals = new LinkedList<AI>();
 	public static Board myBoard;
 	public static int[] scores;
+	public static int moves;
+    public static int maxMoves;
+    public static int gen;
+    public static int x;
 	
 	public boolean randomizeFunction;
 	public ArrayList<Double> weightsBefore;
@@ -23,11 +27,35 @@ public class GameCopy extends JFrame{
 	GameCopy() {
 	    // G R A F I K
 		//myBoard = new Board();
-	    setResizable(false);
+	    /*setResizable(false);
 	    pack();
 	    setTitle("Snake");
 	    setLocationRelativeTo(null);
-	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);*/
+	}
+	
+	public int getCurrentGen(){
+		return x;
+	} // useless, wrong programming for createFood() after createPattern
+	
+	public int getCurrentMove(){
+		return moves;
+	} // useless, wrong programming for createFood() after createPattern
+	
+	public static void setGenerations(int i){
+		gen = i;
+	}
+	
+	public int getGenerations(){
+		return gen;
+	}
+	
+	public static void setMoves(int i){
+		maxMoves = i;
+	}
+	
+	public int getMaxMoves(){
+		return maxMoves;
 	}
 	
 	public void getTotalscore (int generation){
@@ -37,7 +65,7 @@ public class GameCopy extends JFrame{
 	public int getGeneration (int generation){
 		return generation;
 	}
-	
+	//for what?
 	public void letPlay(int u){
 		//select safed AI
 		//new class for letting an safed AI play
@@ -73,10 +101,10 @@ public class GameCopy extends JFrame{
         		 System.out.println("Y"+k+" "+myBoard.snake.getSnakeY(k));
         		 System.out.println("X"+k+" "+myBoard.snake.getSnakeX(k));*/
         		 
-        		 individual.setInput(myBoard.snake.getSnakeY(k)* 10 + myBoard.snake.getSnakeX(k), -1);
+        		 individual.setInput(myBoard.snake.getSnakeY(k)* 10 + myBoard.snake.getSnakeX(k), -2);
         	 }
         	 
-        	 //individual.setInput(myBoard.snake.getSnakeY(0)* 10 + myBoard.snake.getSnakeX(0), -2);
+individual.setInput(myBoard.snake.getSnakeY(0)* 10 + myBoard.snake.getSnakeX(0), -1);
         	 
         	 // EVALUATE OUTPUT ANN
         	 individual.Layers[1].updateLayer();
@@ -90,28 +118,28 @@ public class GameCopy extends JFrame{
         	 
         	 //(!snake.isMovingDown())
         	 
-        	 if ((outputUp>outputDown)&&(outputUp>outputLeft)&&(outputUp>outputRight)){
+        	 if ((outputUp>outputDown)&&(outputUp>outputLeft)&&(outputUp>outputRight)&&(!myBoard.snake.isMovingDown())){
         		myBoard.snake.setMovingUp(true);
  	            myBoard.snake.setMovingRight(false);
  	            myBoard.snake.setMovingLeft(false);
  	            myBoard.snake.setMovingDown(false);
         	 }
         	 
-        	 if ((outputRight>outputDown)&&(outputRight>outputLeft)&&(outputRight>outputUp)){
+        	 if ((outputRight>outputDown)&&(outputRight>outputLeft)&&(outputRight>outputUp)&&(!myBoard.snake.isMovingLeft())){
         		myBoard.snake.setMovingUp(false);
   	            myBoard.snake.setMovingRight(true);
   	            myBoard.snake.setMovingLeft(false);
   	            myBoard.snake.setMovingDown(false);
         	 }
         	 
-        	 if ((outputLeft>outputDown)&&(outputLeft>outputUp)&&(outputLeft>outputRight)){
+        	 if ((outputLeft>outputDown)&&(outputLeft>outputUp)&&(outputLeft>outputRight)&&(!myBoard.snake.isMovingRight())){
         		myBoard.snake.setMovingUp(false);
   	            myBoard.snake.setMovingRight(false);
   	            myBoard.snake.setMovingLeft(true);
   	            myBoard.snake.setMovingDown(false);
         	 }
         	 
-        	 if ((outputDown>outputUp)&&(outputDown>outputLeft)&&(outputDown>outputRight)){
+        	 if ((outputDown>outputUp)&&(outputDown>outputLeft)&&(outputDown>outputRight)&&(!myBoard.snake.isMovingUp())){
         		myBoard.snake.setMovingUp(false);
   	            myBoard.snake.setMovingRight(false);
   	            myBoard.snake.setMovingLeft(false);
@@ -128,7 +156,10 @@ public class GameCopy extends JFrame{
 			individual.initialize();
 			individuals.add(individual);
 		}
-		for (int x=0;x<180000;x++){
+		
+		setGenerations(10000);
+// CHANGED
+		for (x=0;x<gen;x++){
 	
 		for (int a=0;a<100;a++){
 		
@@ -151,11 +182,15 @@ public class GameCopy extends JFrame{
 	        }
 	    });*/
 			
-	    int moves = 0;
+	    moves =0;
+	    setMoves(10000);
+	    /*int moves=0;
+	     * int maxMoves = 10'000;
+	     */
 	    while ((myBoard.inGame==true)){
 	    	oneStep(a);
 	    	moves++;
-	    	if (moves > 10000){
+	    	if (moves > maxMoves){
 	    		myBoard.inGame = false;
 	    	}
 	    } 
@@ -297,7 +332,7 @@ public class GameCopy extends JFrame{
 			System.out.println("--------------------------------");
 		}*/
 		
-		if (x==17999){
+		if (x==(gen-1)){
 			for (int layer=1;layer<3;layer++){
 				for (int n=0;n<newGen.get(0).Layers[layer].Neurons.size();n++){
 					
