@@ -5,7 +5,9 @@ import snakecopy2.NeuronLayer;
 public class AI implements Comparable<AI>{
 	
 	public int score;
-	public double  mutationConst = 0.22;
+	public double uniformRate = 0.9;
+	public double  mutationConst = 0.15;
+	public double mutationRate = 0.01;
 	public Neuron[] InputNeurons;
 	public Neuron[] HiddenNeurons;
 	public Neuron[] OutputNeurons;
@@ -26,29 +28,31 @@ public class AI implements Comparable<AI>{
 		}
 	}
 	
-	public void randomize(){
+	public void crossover(AI newSol, AI indiv1, AI indiv2) {
+	    for (int i=1;i<3;i++){
+			for (int j=0;j<newSol.Layers[i].Neurons.size();j++){
+				for (int k=0;k<newSol.Layers[i].Neurons.get(j).Weights.size();k++){
+	        
+	    	if (Math.random() <= uniformRate) {
+	    		newSol.Layers[i].Neurons.get(j).Weights.set(k, indiv1.Layers[i].Neurons.get(j).Weights.get(k));
+	        } else {
+	        	newSol.Layers[i].Neurons.get(j).Weights.set(k, indiv2.Layers[i].Neurons.get(j).Weights.get(k));
+	        }
+	    }
+			}
+	    }
+	    //return newSol;
+	}
+
+	
+	public void mutate(){
 		for (int i=1;i<3;i++){
 			for (int j=0;j<Layers[i].Neurons.size();j++){
 				for (int k=0;k<Layers[i].Neurons.get(j).Weights.size();k++){
 					double w = Layers[i].Neurons.get(j).Weights.get(k);
-					
-					// 			1 (favorite)
-					w = w + mutationConst * (Math.random()*2-1);
-					
-					/*			2
-					if (Math.random()*1>=0.5){
-						why = true;
+					if (Math.random()<=mutationRate){
+						w = w + mutationConst * (Math.random()*2-1);
 					}
-					if (Math.random()*1<0.5){
-						why = false;
-					}
-					if (why==true){
-						w = w + (mutationConst*Math.random());
-					}
-					if (why==false){
-						w = w - (mutationConst*Math.random());
-					}*/
-					
 					Layers[i].Neurons.get(j).Weights.set(k, w);
 					
 	// lower mutationConstant if present generationScore is higher than predecessors generationScore

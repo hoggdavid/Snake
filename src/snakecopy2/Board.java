@@ -107,9 +107,8 @@ public class Board extends JPanel implements ActionListener {
 		totaltime = 0;
 		turns = 0;
 	    food.createPattern();
-	    snake.setJoints(3);
+	    //snake.setJoints(3);
 	    food.createFood(); 
-		//snake.setJoints(3); 
 
 	    // Create our snake's body
 	    for (int i = 0; i < snake.getJoints(); i++) {

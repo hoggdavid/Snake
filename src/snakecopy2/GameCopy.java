@@ -20,6 +20,7 @@ public class GameCopy extends JFrame{
     public static int maxMoves;
     public static int gen;
     public static int x;
+    public static AI newIndiv;
 	
 	public boolean randomizeFunction;
 	public ArrayList<Double> weightsBefore;
@@ -252,23 +253,47 @@ individual.setInput(myBoard.snake.getSnakeY(0)* 10 + myBoard.snake.getSnakeX(0),
 // D E B U G (generation score)
 		System.out.println("gen "+x+" total "+totalscore);
 		
-		//Genetic Algorithm
+		
+		
+//Genetic Algorithm
 		Collections.sort(individuals);
 		LinkedList<AI> newGen = new LinkedList<AI>();
-		//13 best + copies
+		
+// CROSSOVER
+		int m;
+		int i;
+		for (i=0;i<14;i++){
+			m = i + 1;
+			AI indiv1 = individuals.get(i);
+			AI indiv2 = individuals.get(m);
+			newIndiv.crossover(newIndiv, indiv1, indiv2);
+			newIndiv.mutate();
+			newGen.add(newIndiv);
+			i = i + 1;
+		}
+		for (int o=0;o<13;o++){
+				newGen.add(individuals.get(o));
+				//individuals parents 0-6, makes 7-20
+		}
+		for (int r=14;r<93;r++){
+			newGen.add(individuals.get(r));
+		}
+		
+/* ZWITTERVERFAHREN (13 best + copies)
 		for (int o=0;o<13;o++){
 			for (int z=13;z>o;z--){
 				newGen.add(individuals.get(o));
 				//individuals 0/90 
 			}
 		}
-		
 		for (int n=0;n<9;n++){
 			individual = new AI();
 			individual.initialize();
 			newGen.add(individual);
 			//individuals 91/99 
-		}
+		}*/
+		
+		
 		
 /* D E B U G (1/ randomize control) (sort control)
 		
@@ -292,7 +317,7 @@ individual.setInput(myBoard.snake.getSnakeY(0)* 10 + myBoard.snake.getSnakeX(0),
 			System.out.println("----------------------------------");
 		}*/
 		
-		// R A N D O M I Z E
+/* ZWITTERVERFAHREN, ALLE MUTIEREN
 		int j = 1;
 		int k = 13;
 		int jPlus = 13;
@@ -302,13 +327,13 @@ individual.setInput(myBoard.snake.getSnakeY(0)* 10 + myBoard.snake.getSnakeX(0),
 
 			for (int r=j;r<k;r++){
 				newGen.get(r);
-				individual.randomize();
+				individual.mutate();
 			}
 			j = j+jPlus;
 			k = k+kPlus;
 			jPlus = jPlus -1;
 			kPlus = kPlus -1;
-		}
+		}*/
 		
 /* D E B U G (2/ randomize control)
 		

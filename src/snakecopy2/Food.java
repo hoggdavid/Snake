@@ -2,7 +2,7 @@ package snakecopy2;
 
 public class Food {
 
-	private Snake snake = new Snake();
+	private Snake snake;
 	private GameCopy game = new GameCopy();
 	private int foodX; // Stores X pos of our food
 	private int foodY; // Stores Y pos of our food
@@ -31,7 +31,8 @@ public class Food {
 	}
 	
 	public void createFood() {
-			//snake.setJoints(3);
+			snake = new Snake();
+			snake.setJoints(3);
 			foodX = patternX[snake.getJoints()-3];
 	    	foodY = patternY[snake.getJoints()-3];
 	    	
@@ -40,7 +41,6 @@ public class Food {
 	    	if ((foodX == snake.getSnakeX(i)) && (foodY == snake.getSnakeY(i))) {
 		        createFood();
 		    }
-	    	
 	    }
 	}
 
