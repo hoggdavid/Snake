@@ -2,8 +2,7 @@ package snakecopy2;
 
 public class Food {
 
-	private Snake snake;
-	private GameCopy game = new GameCopy();
+	private Snake snake = new Snake();
 	private int foodX; // Stores X pos of our food
 	private int foodY; // Stores Y pos of our food
 	public int[] patternX;
@@ -13,10 +12,10 @@ public class Food {
 		pattern[place] = value;
 	}
 
-	public void createPattern(){
+	/*public void createPattern(){
 		
-		/*patternX = new int[game.getMaxMoves()];
-		patternY = new int[game.getMaxMoves()];*/
+		patternX = new int[game.getMaxMoves()];
+		patternY = new int[game.getMaxMoves()];
 		
 		for (int loop=0;loop<game.getMaxMoves();loop++){
 			
@@ -28,13 +27,12 @@ public class Food {
 		    //patternY[loop] = locationY;
 		    
 		}
-	}
+	}*/
 	
 	public void createFood() {
-			snake = new Snake();
-			snake.setJoints(3);
-			foodX = patternX[snake.getJoints()-3];
-	    	foodY = patternY[snake.getJoints()-3];
+
+			foodX = GameCopy.patternX[GameCopy.patternIndex];
+			foodY = GameCopy.patternY[GameCopy.patternIndex];
 	    	
 	    for (int i = 0; i<snake.getJoints();i++){
 	    	
