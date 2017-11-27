@@ -43,8 +43,7 @@ public class Food {
 	}
 
 	public int getFoodX() {
-
-	    return foodX;
+		return foodX;
 	}
 
 	public int getFoodY() {

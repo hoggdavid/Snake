@@ -5,7 +5,7 @@ import snakecopy2.NeuronLayer;
 public class AI implements Comparable<AI>{
 	
 	public int score;
-	public double uniformRate = 0.9;
+	public double uniformRate = 0.5;
 	public double  mutationConst = 0.15;
 	public double mutationRate = 0.01;
 	public Neuron[] InputNeurons;
@@ -41,9 +41,12 @@ public class AI implements Comparable<AI>{
 	    }
 			}
 	    }
-	    //return newSol;
+	    //returnSol(newSol);
 	}
 
+	public AI returnSol(AI sol){
+		return sol;
+	}
 	
 	public void mutate(){
 		for (int i=1;i<3;i++){
