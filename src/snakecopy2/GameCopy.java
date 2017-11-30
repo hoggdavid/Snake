@@ -41,14 +41,14 @@ public class GameCopy extends JFrame{
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);*/
 	}
 	
-	public int getCurrentGen(){
-		return x;
-	} // useless, wrong programming for createFood() after createPattern
+	public static void rollDice(AI ind){
+		ind.dice = Math.random() * ind.score;
+	}
 	
-	public int getCurrentMove(){
-		return moves;
-	} // useless, wrong programming for createFood() after createPattern
-	
+	public static void deleteDice(AI ind){
+		ind.dice = 0;
+	}
+
 	public static void setGenerations(int i){
 		gen = i;
 	}
@@ -201,15 +201,15 @@ individual.setInput(myBoard.snake.getSnakeY(0)* 10 + myBoard.snake.getSnakeX(0),
 	    
 	    
 /* D E B U G (score individual) (score)
-	    	if (a==7){
+	    	if (a==0){
 	    		System.out.println("Scores:");
-	    		System.out.println(x + "-1st" + myBoard.getScore());
+	    		System.out.println("gen: "+ x +" score: "+ myBoard.getScore()+" moves: "+moves);
 	    	}
-	    	if (a==33){
-	    		System.out.println(x + "-2nd" + myBoard.getScore());
+	    	if (a==14){
+	    		System.out.println("gen: "+ x +" score: "+ myBoard.getScore()+" moves: "+moves);	    	
 	    	}
-	    	if (a==99){
-	    		System.out.println(x + "-3rd" + myBoard.getScore());
+	    	if (a==56){
+	    		System.out.println("gen: "+ x +" score: "+ myBoard.getScore()+" moves: "+moves);
 	    		System.out.println("--------------------------------");
 	    	}*/
 	    
@@ -249,47 +249,50 @@ individual.setInput(myBoard.snake.getSnakeY(0)* 10 + myBoard.snake.getSnakeX(0),
 			totalscore += individuals.get(k).score;
 		}
 		
-/* D E B U G (generation score)
-		System.out.println("gen "+x+" total "+totalscore);*/
+// D E B U G (generation score)
+		System.out.println("gen "+x+" total "+totalscore);
 		
 		
 		
 //Genetic Algorithm (crossover)
-		Collections.sort(individuals);
 		LinkedList<AI> newGen = new LinkedList<AI>();
-		int m;
-		int i;
-		for (i=0;i<14;i++){
-			m = i + 1;
-			AI indiv1 = individuals.get(i);
-			AI indiv2 = individuals.get(m);
+		for (int i=0;i<100;i++){
+			for (int j=0;j<100;j++){
+				rollDice(individuals.get(i));
+			}
+			Collections.sort(individuals);
+			AI indiv1 = individuals.get(0);
+			AI indiv2 = individuals.get(1);
 			newIndiv = new AI();
 			newIndiv.initialize();
-// D E B U G (1/ newIndiv)
-			AI before = new AI();
-		    before = newIndiv;
-			
-			newIndiv.crossover(newIndiv, indiv1, indiv2); // problem that void returns nothing
+/* D E B U G (1/ newIndiv)
+		    AI before = newIndiv;*/
+			newIndiv.crossover(indiv1, indiv2); // problem that void returns nothing
 			newIndiv.returnSol(newIndiv);
-// D E B U G (2/ newIndiv)
-			AI after = new AI();
-			after = newIndiv;
+/* D E B U G (2/ newIndiv)
+			AI after = newIndiv;
 			if (before==after){
 				System.out.println("same");
 			}else{
 				System.out.println("different");
-			}
+			}*/
 			
 			newIndiv.mutate();
 			newGen.add(newIndiv);
-			i = i + 1;
 		}
-		for (int o=0;o<14;o++){
+		
+		for (int i=0;i<0;i++){
+			AI individual = new AI();
+			individual.initialize();
+			newGen.add(individual);
+		}
+		
+		/*for (int o=0;o<14;o++){
 				newGen.add(individuals.get(o));
 		}
 		for (int r=14;r<93;r++){
 			newGen.add(individuals.get(r));
-		}
+		}*/
 		
 /* D E B U G (1/ ArrayList Size) 		
 		System.out.println("indiv1: "+individuals.size());
@@ -389,17 +392,24 @@ individual.setInput(myBoard.snake.getSnakeY(0)* 10 + myBoard.snake.getSnakeX(0),
 		}*/
 		
 		if (x==(gen-1)){
+			AI best = individuals.get(0);
+			for (int i=1;i<100;i++){
+				if (individuals.get(i).score>best.score){
+					best = individuals.get(i);
+				}
+			}
 			for (int layer=1;layer<3;layer++){
-				for (int n=0;n<newGen.get(0).Layers[layer].Neurons.size();n++){
+				for (int n=0;n<best.Layers[layer].Neurons.size();n++){
 					
 					ArrayList<Double>FinalWeights;
 					FinalWeights = new ArrayList<Double>();
-					for (int w=0;w<newGen.get(0).Layers[layer].Neurons.get(n).Weights.size();w++){
-						FinalWeights.add(newGen.get(0).Layers[layer].Neurons.get(n).Weights.get(w));
+					for (int w=0;w<best.Layers[layer].Neurons.get(n).Weights.size();w++){
+						FinalWeights.add(best.Layers[layer].Neurons.get(n).Weights.get(w));
 					}
 					try {
 						GameCopy.write("AI_gen("+x+")_layer("+layer+")_neuron("+n+")", FinalWeights);
 						System.out.println(FinalWeights);
+						System.out.println(best.score);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

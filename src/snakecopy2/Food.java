@@ -33,7 +33,7 @@ public class Food {
 
 			foodX = GameCopy.patternX[GameCopy.patternIndex];
 			foodY = GameCopy.patternY[GameCopy.patternIndex];
-	    	
+	    	GameCopy.patternIndex++;
 	    for (int i = 0; i<snake.getJoints();i++){
 	    	
 	    	if ((foodX == snake.getSnakeX(i)) && (foodY == snake.getSnakeY(i))) {

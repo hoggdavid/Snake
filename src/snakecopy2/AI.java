@@ -5,6 +5,7 @@ import snakecopy2.NeuronLayer;
 public class AI implements Comparable<AI>{
 	
 	public int score;
+	public double dice;
 	public double uniformRate = 0.5;
 	public double  mutationConst = 0.15;
 	public double mutationRate = 0.01;
@@ -28,15 +29,15 @@ public class AI implements Comparable<AI>{
 		}
 	}
 	
-	public void crossover(AI newSol, AI indiv1, AI indiv2) {
+	public void crossover(AI indiv1, AI indiv2) {
 	    for (int i=1;i<3;i++){
-			for (int j=0;j<newSol.Layers[i].Neurons.size();j++){
-				for (int k=0;k<newSol.Layers[i].Neurons.get(j).Weights.size();k++){
+			for (int j=0;j<this.Layers[i].Neurons.size();j++){
+				for (int k=0;k<this.Layers[i].Neurons.get(j).Weights.size();k++){
 	        
 	    	if (Math.random() <= uniformRate) {
-	    		newSol.Layers[i].Neurons.get(j).Weights.set(k, indiv1.Layers[i].Neurons.get(j).Weights.get(k));
+	    		this.Layers[i].Neurons.get(j).Weights.set(k, indiv1.Layers[i].Neurons.get(j).Weights.get(k));
 	        } else {
-	        	newSol.Layers[i].Neurons.get(j).Weights.set(k, indiv2.Layers[i].Neurons.get(j).Weights.get(k));
+	        	this.Layers[i].Neurons.get(j).Weights.set(k, indiv2.Layers[i].Neurons.get(j).Weights.get(k));
 	        }
 	    }
 			}
@@ -68,8 +69,8 @@ public class AI implements Comparable<AI>{
 	}
 	
 	public int compareTo(AI o) {
-        int f1 = this.score;
-        int f2 = o.score;
+        double f1 = this.dice;
+        double f2 = o.dice;
  
         if (f1 < f2)
             return 1;

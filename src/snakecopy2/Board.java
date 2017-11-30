@@ -139,7 +139,6 @@ public class Board extends JPanel implements ActionListener {
 	        // Add a 'joint' to our snake
 	        snake.setJoints(snake.getJoints() + 1);
 	        // Create new food
-	        GameCopy.patternIndex++;
 	        food.createFood();
 	    }
 	}
@@ -180,7 +179,7 @@ public class Board extends JPanel implements ActionListener {
 	}
 	
 	public int getScore(){
-		int score = snake.getJoints()-3;
+		int score = snake.getJoints()-2;
 		return score;
 	}
 	
