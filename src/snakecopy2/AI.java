@@ -1,4 +1,6 @@
 package snakecopy2;
+import java.util.LinkedList;
+
 import snakecopy2.Neuron;
 import snakecopy2.NeuronLayer;
 
@@ -7,8 +9,9 @@ public class AI implements Comparable<AI>{
 	public int score;
 	public double dice;
 	public double uniformRate = 0.5;
-	public double  mutationConst = 0.15;
-	public double mutationRate = 0.01;
+	public double crossoverProb = 0.6;
+	public double mutationConst = 0.15;
+	public double mutationRate = 0.001;
 	public Neuron[] InputNeurons;
 	public Neuron[] HiddenNeurons;
 	public Neuron[] OutputNeurons;
@@ -29,20 +32,26 @@ public class AI implements Comparable<AI>{
 		}
 	}
 	
-	public void crossover(AI indiv1, AI indiv2) {
-	    for (int i=1;i<3;i++){
-			for (int j=0;j<this.Layers[i].Neurons.size();j++){
-				for (int k=0;k<this.Layers[i].Neurons.get(j).Weights.size();k++){
+	public void crossover(AI child, AI indiv1, AI indiv2, LinkedList<AI> generation) {
+		if (Math.random()<=crossoverProb){
+			for (int i=1;i<3;i++){
+				for (int j=0;j<this.Layers[i].Neurons.size();j++){
+					for (int k=0;k<this.Layers[i].Neurons.get(j).Weights.size();k++){
 	        
-	    	if (Math.random() <= uniformRate) {
-	    		this.Layers[i].Neurons.get(j).Weights.set(k, indiv1.Layers[i].Neurons.get(j).Weights.get(k));
-	        } else {
-	        	this.Layers[i].Neurons.get(j).Weights.set(k, indiv2.Layers[i].Neurons.get(j).Weights.get(k));
-	        }
-	    }
+						if (Math.random() <= uniformRate) {
+							this.Layers[i].Neurons.get(j).Weights.set(k, indiv1.Layers[i].Neurons.get(j).Weights.get(k));
+						}else{
+							this.Layers[i].Neurons.get(j).Weights.set(k, indiv2.Layers[i].Neurons.get(j).Weights.get(k));
+						}
+					}
+				}
 			}
-	    }
-	    //returnSol(newSol);
+			returnSol(child);
+			mutate();
+			generation.add(child);
+		}else{
+			generation.remove(child);
+		}
 	}
 
 	public AI returnSol(AI sol){
