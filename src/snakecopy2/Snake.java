@@ -2,18 +2,15 @@ package snakecopy2;
 
 public class Snake {
 
-	// Stores the joints / body part locations for our snake
 	private final int[] x = new int[Board.getAllDots()];
 	private final int[] y = new int[Board.getAllDots()];
 
-	// Stores direction of our snake
 	private boolean movingLeft = false;
 	private boolean movingRight = false;
 	private boolean movingUp = false;
 	private boolean movingDown = false;
 
-	private int joints = 0; // Stores # of dots / joints the snake has (starts
-	                        // with 3)
+	private int joints = 0; 
 
 	public int getSnakeX(int index) {
 	    return x[index];
@@ -72,30 +69,26 @@ public class Snake {
 	}
 
 	public void move() {
-	    for (int i = joints; i > 0; i--) {
-
-	        // Moves the joints of the snake 'up the chain'
-	        // Meaning, the joint of the snake all move up one
-	        x[i] = x[(i - 1)];
+	    
+		for (int i = joints; i > 0; i--) {
+			x[i] = x[(i - 1)];
 	        y[i] = y[(i - 1)];
 	    }
 
-	    // Moves snake to the left
 	    if (movingLeft) {
 	        x[0] -= 1;
 	    }
-	    // To the right
+
 	    if (movingRight) {
 	        x[0] += 1;
 	    }
-	    // Down
+
 	    if (movingDown) {
 	        y[0] += 1;
 	    }
-	    // And finally up
+
 	    if (movingUp) {
 	        y[0] -= 1;
 	    }
-
 	}
 }

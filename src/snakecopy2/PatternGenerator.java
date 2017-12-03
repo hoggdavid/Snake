@@ -3,7 +3,7 @@ package snakecopy2;
 import java.util.Arrays;
 
 public class PatternGenerator {
-	// idea and code by Patrick Spengler
+	// code by Patrick Spengler
 	public static void main(String[] args) {
 		// Moves had to be shortened from 10'000 to 5'000 because the programm couldn't accept it
 		int nFoods = 5000; 		int boardSizeX = 150/15;

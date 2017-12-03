@@ -1,5 +1,7 @@
-package snakecopy2;
+package missing_src;
 import snakecopy2.AI;
+import snakecopy2.Board;
+
 import java.awt.EventQueue;
 import java.util.ArrayList;
 

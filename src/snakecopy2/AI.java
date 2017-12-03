@@ -66,12 +66,7 @@ public class AI implements Comparable<AI>{
 					if (Math.random()<=mutationRate){
 						w = w + mutationConst * (Math.random()*2-1);
 					}
-					Layers[i].Neurons.get(j).Weights.set(k, w);
-					
-	// lower mutationConstant if present generationScore is higher than predecessors generationScore
-	// otherwise increase the mutationConstant
-	// int generation; w void getGen and getTotal it could work
-					
+					Layers[i].Neurons.get(j).Weights.set(k, w);					
 				}
 			}
 		}
@@ -119,7 +114,6 @@ public class AI implements Comparable<AI>{
 		Layers = new NeuronLayer[layer];
 		addLayer(Layers, layer);
 		
-		// CONNECTING
 		for (int hidden=0;hidden<5;hidden++){
 			for (int inner=0;inner<100;inner++){
 				HiddenNeurons[hidden].connectTo(InputNeurons[inner], 2*Math.random()-1.0);

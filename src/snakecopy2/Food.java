@@ -3,8 +3,8 @@ package snakecopy2;
 public class Food {
 
 	private Snake snake = new Snake();
-	private int foodX; // Stores X pos of our food
-	private int foodY; // Stores Y pos of our food
+	private int foodX; 
+	private int foodY; 
 	public int[] patternX;
 	public int[] patternY;
 	
@@ -12,22 +12,7 @@ public class Food {
 		pattern[place] = value;
 	}
 
-	/*public void createPattern(){
-		
-		patternX = new int[game.getMaxMoves()];
-		patternY = new int[game.getMaxMoves()];
-		
-		for (int loop=0;loop<game.getMaxMoves();loop++){
-			
-			int locationX = (int) (Math.random() * Board.getBoardWidthVirt());
-			addPattern(patternX, locationX, loop);
-		    //patternX[loop] = locationX;
-		    int locationY = (int) (Math.random() * Board.getBoardHeightVirt());
-		    addPattern(patternY, locationY, loop);
-		    //patternY[loop] = locationY;
-		    
-		}
-	}*/
+	//public void createPattern(){
 	
 	public void createFood() {
 

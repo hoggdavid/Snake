@@ -43,8 +43,5 @@ public class Neuron {
 		}
 		// calculate output
 		output = 1/(1+Math.exp(-input));
-		
-		//dumb neuron
 	}
-	
 }
