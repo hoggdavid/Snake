@@ -8,12 +8,12 @@ public class AI implements Comparable<AI>{
 	
 	public int score;
 	public int movesToScore;
-	public int fitness; //not sure
+	public int fitness;
 	public double dice;
 	public double uniformRate = 0.5; //constant
-	public double crossoverProb = 0.65; //0.6
-	public double mutationConst = 0.25; //0.15
-	public double mutationRate = 0.001; //0.001
+	public double crossoverProb = 0.6; //0.6
+	public double mutationConst = 0.15; //0.15
+	public double mutationRate = 0.0001; //0.001
 	public Neuron[] InputNeurons;
 	public Neuron[] HiddenNeurons;
 	public Neuron[] OutputNeurons;
@@ -87,7 +87,7 @@ public class AI implements Comparable<AI>{
 		this.fitness = this.score*5000-this.movesToScore;
 	}
 	
-	public void setMoves(int a){
+	public void setMovesToScore(int a){
 		this.movesToScore = a;
 	}
 

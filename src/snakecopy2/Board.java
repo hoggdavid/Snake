@@ -136,7 +136,7 @@ public class Board extends JPanel implements ActionListener {
 
 	    if ((snake.getSnakeX(0) == food.getFoodX()) && (snake.getSnakeY(0) == food.getFoodY())) {
 
-	    	GameCopy.myBoard.movesToLastFood = GameCopy.myBoard.movesTo2ndLast;
+	    	GameCopy.myBoard.movesTo2ndLast=GameCopy.myBoard.movesToLastFood;
 	    	GameCopy.myBoard.movesToLastFood = 0;
 	        // Add a 'joint' to our snake
 	        snake.setJoints(snake.getJoints() + 1);
@@ -154,6 +154,7 @@ public class Board extends JPanel implements ActionListener {
 	        // Snake can't intersect with itself if it's not larger than 5
 	        if ((i > 5) && (snake.getSnakeX(0) == snake.getSnakeX(i) && (snake.getSnakeY(0) == snake.getSnakeY(i)))) {
 	            inGame = false; // then the game ends
+	            GameCopy.myBoard.movesTo2ndLast=GameCopy.myBoard.movesToLastFood;
 	            GameCopy.myBoard.movesToLastFood = 0;
 	        }
 	    }
