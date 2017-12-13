@@ -11,8 +11,6 @@ public class Food {
 	public void addPattern(int[] pattern, int value, int place){
 		pattern[place] = value;
 	}
-
-	//public void createPattern(){
 	
 	public void createFood() {
 

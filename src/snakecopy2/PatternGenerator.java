@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class PatternGenerator {
 	// code by Patrick Spengler
 	public static void main(String[] args) {
-		// Moves had to be shortened from 10'000 to 5'000 because the programm couldn't accept it
+		
 		int nFoods = 5000; 		int boardSizeX = 150/15;
 		int boardSizeY = 150/15;
 		int patternX[];
