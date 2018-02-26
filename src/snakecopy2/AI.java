@@ -11,8 +11,8 @@ public class AI implements Comparable<AI>{
 	public double dice;
 	public double uniformRate = 0.5; //constant 
 	public double crossoverProb = 0.6; //0.6
-	public double mutationConst = 0.15; //0.15  1
-	public double mutationRate = 0.0001; //0.001  0.1
+	public double mutationConst = 0.1; //0.15
+	public double mutationRate = 0.1; //0.001
 	public Neuron[] InputNeurons;
 	public Neuron[] HiddenNeurons;
 	public Neuron[] OutputNeurons;

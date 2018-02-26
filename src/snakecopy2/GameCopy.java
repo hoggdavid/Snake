@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 public class GameCopy extends JFrame{
 
 	public static AI individual;
-	public static LinkedList<AI> individuals = new LinkedList<AI>();
+	public static LinkedList<AI> individuals;
 	public static Board myBoard;
 	public static int[] scores;
 	public static int moves;
@@ -128,9 +128,11 @@ individual.setInput(myBoard.snake.getSnakeY(0)* 10 + myBoard.snake.getSnakeX(0),
 	public static void main(String[] args) {
 		
 //change here
-		anzahl = 1000;
+		anzahl = 30000;
 		dataIndex=1;
 		for (int t=0;t<dataIndex;t++){
+			
+		individuals = new LinkedList<AI>();
 		
 		for (int day7=0;day7<100;day7++){
 			individual = new AI();
@@ -193,14 +195,14 @@ individual.setInput(myBoard.snake.getSnakeY(0)* 10 + myBoard.snake.getSnakeX(0),
 		individuals = newGen;
 		
 		if (xCurrent==(xMax-1)){
-			AI best = individuals.get(0);
+			/*AI best = individuals.get(0);
 			int bestScore = individuals.get(0).score;
 			for (int i=1;i<100;i++){
 				if ((individuals.get(i).score)>(bestScore)){
 					best = individuals.get(i);
 					bestScore = individuals.get(i).score;
 				}
-			}	
+			}*/
 
 			Double Qgen = 0.0;
 			int correct =0;
@@ -219,10 +221,10 @@ individual.setInput(myBoard.snake.getSnakeY(0)* 10 + myBoard.snake.getSnakeX(0),
 			}
 
 			
-			ArrayList<Double>Numbers;
+			/*ArrayList<Double>Numbers;
 			Numbers = new ArrayList<Double>();
 			Numbers.add((double)bestScore);
-			/*for (int layer=1;layer<3;layer++){
+			for (int layer=1;layer<3;layer++){
 				for (int n=0;n<best.Layers[layer].Neurons.size();n++){
 					
 					ArrayList<Double>FinalWeights;
@@ -244,13 +246,13 @@ individual.setInput(myBoard.snake.getSnakeY(0)* 10 + myBoard.snake.getSnakeX(0),
 				e.printStackTrace();
 			}*/
 			try{
-				GameCopy.write(dataIndex+" xcel (3000_10*300)", excelScores);
+				GameCopy.write(t+" xcel (100_10*10)", excelScores);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 	} 
-		
+		xCurrent=0;
 }
 		ArrayList<Double>aiConst;
 		aiConst = new ArrayList<Double>();
