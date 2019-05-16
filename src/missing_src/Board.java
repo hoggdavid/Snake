@@ -1,8 +1,8 @@
 package missing_src;
 
 public class Board {
-	
-	public Board() {
+
+    public Board() {
 
 	    /*addKeyListener(new Keys());
 	    setBackground(Color.pink);
@@ -10,7 +10,7 @@ public class Board {
 
 	    setPreferredSize(new Dimension(BOARDWIDTH, BOARDHEIGHT));*/
 
-	    //initializeGame();
-	}
+        //initializeGame();
+    }
 
 }

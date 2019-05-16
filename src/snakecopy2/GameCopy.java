@@ -1,5 +1,7 @@
 package snakecopy2;
+
 import snakecopy2.AI;
+
 import java.awt.EventQueue;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -10,13 +12,13 @@ import java.util.LinkedList;
 
 import javax.swing.JFrame;
 
-public class GameCopy extends JFrame{
+public class GameCopy extends JFrame {
 
-	public static AI individual;
-	public static LinkedList<AI> individuals;
-	public static Board myBoard;
-	public static int[] scores;
-	public static int moves;
+    public static AI individual;
+    public static LinkedList<AI> individuals;
+    public static Board myBoard;
+    public static int[] scores;
+    public static int moves;
     public static int maxMoves;
     public static int xMax;
     public static int xCurrent;
@@ -28,173 +30,173 @@ public class GameCopy extends JFrame{
     public static int indivMissing;
     public static int dataIndex;
     public static int anzahl;
-	public boolean randomizeFunction;
-	public ArrayList<Double> weightsBefore;
-	
-	GameCopy() {
-	}
-	
-	public static void rollDice(AI ind){
-		ind.dice = Math.random() * ind.fitness;
-	}
-	
-	public static void deleteDice(AI ind){
-		ind.dice = 0;
-	}
+    public boolean randomizeFunction;
+    public ArrayList<Double> weightsBefore;
 
-	public static void setGenerations(int i){
-		xMax = i;
-	}
-	
-	public static void setMoves(int i){
-		maxMoves = i;
-	}
-	
-	public int getMaxMoves(){
-		return maxMoves;
-	}
-	
-	public static void write (String filename, ArrayList<Double>p) throws IOException{
-		  BufferedWriter outputWriter = null;
-		  outputWriter = new BufferedWriter(new FileWriter(filename));
-		  for (int i = 0; i < p.size(); i++) {
-		    outputWriter.write(Double.toString((p.get(i))));
-		    outputWriter.newLine();
-		  }
-		  outputWriter.flush();  
-		  outputWriter.close();  
-		}
-	
-	public void load(int u){
-	}
-	
-	public static void oneStep(int player){
-		
-		individual = individuals.get(player);
-		for (int k=0;k<100;k++){
-        	individual.setInput(k,0);
-        	}
-        	
-        	individual.setInput(myBoard.food.getFoodY()*10 + myBoard.food.getFoodX(), 1);
-        	
-        	 for (int k=myBoard.snake.getJoints(); k>0;k--) {
-        		 
-        		 individual.setInput(myBoard.snake.getSnakeY(k)* 10 + myBoard.snake.getSnakeX(k), -2);
-        	 }
-        	 
-individual.setInput(myBoard.snake.getSnakeY(0)* 10 + myBoard.snake.getSnakeX(0), -1);
-        	 
-        	 // evaluate output
-        	 individual.Layers[1].updateLayer();
-        	 individual.Layers[2].updateLayer();
-        	 
-        	 // get output
-        	 double outputUp = individual.getOutput(0);
-        	 double outputDown = individual.getOutput(1);
-        	 double outputLeft = individual.getOutput(2);
-        	 double outputRight = individual.getOutput(3);
-        	 
-        	 if ((outputUp>outputDown)&&(outputUp>outputLeft)&&(outputUp>outputRight)&&(!myBoard.snake.isMovingDown())){
-        		myBoard.snake.setMovingUp(true);
- 	            myBoard.snake.setMovingRight(false);
- 	            myBoard.snake.setMovingLeft(false);
- 	            myBoard.snake.setMovingDown(false);
-        	 }
-        	 
-        	 if ((outputRight>outputDown)&&(outputRight>outputLeft)&&(outputRight>outputUp)&&(!myBoard.snake.isMovingLeft())){
-        		myBoard.snake.setMovingUp(false);
-  	            myBoard.snake.setMovingRight(true);
-  	            myBoard.snake.setMovingLeft(false);
-  	            myBoard.snake.setMovingDown(false);
-        	 }
-        	 
-        	 if ((outputLeft>outputDown)&&(outputLeft>outputUp)&&(outputLeft>outputRight)&&(!myBoard.snake.isMovingRight())){
-        		myBoard.snake.setMovingUp(false);
-  	            myBoard.snake.setMovingRight(false);
-  	            myBoard.snake.setMovingLeft(true);
-  	            myBoard.snake.setMovingDown(false);
-        	 }
-        	 
-        	 if ((outputDown>outputUp)&&(outputDown>outputLeft)&&(outputDown>outputRight)&&(!myBoard.snake.isMovingUp())){
-        		myBoard.snake.setMovingUp(false);
-  	            myBoard.snake.setMovingRight(false);
-  	            myBoard.snake.setMovingLeft(false);
-  	            myBoard.snake.setMovingDown(true);
-        	 }
-        	 
-        	 myBoard.actionPerformed(null);
-	}
+    GameCopy() {
+    }
 
-	public static void main(String[] args) {
-		
+    public static void rollDice(AI ind) {
+        ind.dice = Math.random() * ind.fitness;
+    }
+
+    public static void deleteDice(AI ind) {
+        ind.dice = 0;
+    }
+
+    public static void setGenerations(int i) {
+        xMax = i;
+    }
+
+    public static void setMoves(int i) {
+        maxMoves = i;
+    }
+
+    public int getMaxMoves() {
+        return maxMoves;
+    }
+
+    public static void write(String filename, ArrayList<Double> p) throws IOException {
+        BufferedWriter outputWriter = null;
+        outputWriter = new BufferedWriter(new FileWriter(filename));
+        for (int i = 0; i < p.size(); i++) {
+            outputWriter.write(Double.toString((p.get(i))));
+            outputWriter.newLine();
+        }
+        outputWriter.flush();
+        outputWriter.close();
+    }
+
+    public void load(int u) {
+    }
+
+    public static void oneStep(int player) {
+
+        individual = individuals.get(player);
+        for (int k = 0; k < 100; k++) {
+            individual.setInput(k, 0);
+        }
+
+        individual.setInput(myBoard.food.getFoodY() * 10 + myBoard.food.getFoodX(), 1);
+
+        for (int k = myBoard.snake.getJoints(); k > 0; k--) {
+
+            individual.setInput(myBoard.snake.getSnakeY(k) * 10 + myBoard.snake.getSnakeX(k), -2);
+        }
+
+        individual.setInput(myBoard.snake.getSnakeY(0) * 10 + myBoard.snake.getSnakeX(0), -1);
+
+        // evaluate output
+        individual.Layers[1].updateLayer();
+        individual.Layers[2].updateLayer();
+
+        // get output
+        double outputUp = individual.getOutput(0);
+        double outputDown = individual.getOutput(1);
+        double outputLeft = individual.getOutput(2);
+        double outputRight = individual.getOutput(3);
+
+        if ((outputUp > outputDown) && (outputUp > outputLeft) && (outputUp > outputRight) && (!myBoard.snake.isMovingDown())) {
+            myBoard.snake.setMovingUp(true);
+            myBoard.snake.setMovingRight(false);
+            myBoard.snake.setMovingLeft(false);
+            myBoard.snake.setMovingDown(false);
+        }
+
+        if ((outputRight > outputDown) && (outputRight > outputLeft) && (outputRight > outputUp) && (!myBoard.snake.isMovingLeft())) {
+            myBoard.snake.setMovingUp(false);
+            myBoard.snake.setMovingRight(true);
+            myBoard.snake.setMovingLeft(false);
+            myBoard.snake.setMovingDown(false);
+        }
+
+        if ((outputLeft > outputDown) && (outputLeft > outputUp) && (outputLeft > outputRight) && (!myBoard.snake.isMovingRight())) {
+            myBoard.snake.setMovingUp(false);
+            myBoard.snake.setMovingRight(false);
+            myBoard.snake.setMovingLeft(true);
+            myBoard.snake.setMovingDown(false);
+        }
+
+        if ((outputDown > outputUp) && (outputDown > outputLeft) && (outputDown > outputRight) && (!myBoard.snake.isMovingUp())) {
+            myBoard.snake.setMovingUp(false);
+            myBoard.snake.setMovingRight(false);
+            myBoard.snake.setMovingLeft(false);
+            myBoard.snake.setMovingDown(true);
+        }
+
+        myBoard.actionPerformed(null);
+    }
+
+    public static void main(String[] args) {
+
 //change here
-		anzahl = 30000;
-		dataIndex=1;
-		for (int t=0;t<dataIndex;t++){
-			
-		individuals = new LinkedList<AI>();
-		
-		for (int day7=0;day7<100;day7++){
-			individual = new AI();
-			individual.initialize();
-			individuals.add(individual);
-		}
-		
-		generationScores = new ArrayList<Double>();
-		setGenerations(10*anzahl);
-		
-		for (xCurrent=0;xCurrent<xMax;xCurrent++){
-	
-		for (int a=0;a<100;a++){
-		
-			myBoard = new Board();
-		
-			moves =0;
-			setMoves(5000);
-			while ((myBoard.inGame==true)){
-				oneStep(a);
-				moves++;
-				if (moves > maxMoves){
-					myBoard.inGame = false;
-				}
-			} 
-	    
-			individuals.get(a).setScore(myBoard.getScore());
-			individuals.get(a).setMovesToScore(myBoard.movesTo2ndLast);
-			individuals.get(a).Fitness();   
-		}
-				
-		int totalscore=0;
-		for (int k=0;k<100;k++){
-			totalscore += individuals.get(k).score;
-		}
-		generationScores.add((double)totalscore);
-		
-		System.out.println("gen "+xCurrent+" total "+totalscore);
-		
-		LinkedList<AI> newGen = new LinkedList<AI>();
-		for (int i=0;i<100;i++){
-			for (int j=0;j<100;j++){
-				rollDice(individuals.get(j));
-			}
-			Collections.sort(individuals);
-			AI indiv1 = individuals.get(0);
-			AI indiv2 = individuals.get(1);
-			newIndiv = new AI();
-			newIndiv.initialize();
-			newIndiv.crossover(newIndiv, indiv1, indiv2, newGen); 
-		}
-		
-		indivMissing = 100 - newGen.size();
-		for (int i=0;i<indivMissing;i++){
-			AI individual = new AI();
-			individual.initialize();
-			newGen.add(individual);
-		} 
-		
-		individuals = newGen;
-		
-		if (xCurrent==(xMax-1)){
+        anzahl = 30000;
+        dataIndex = 1;
+        for (int t = 0; t < dataIndex; t++) {
+
+            individuals = new LinkedList<AI>();
+
+            for (int day7 = 0; day7 < 100; day7++) {
+                individual = new AI();
+                individual.initialize();
+                individuals.add(individual);
+            }
+
+            generationScores = new ArrayList<Double>();
+            setGenerations(10 * anzahl);
+
+            for (xCurrent = 0; xCurrent < xMax; xCurrent++) {
+
+                for (int a = 0; a < 100; a++) {
+
+                    myBoard = new Board();
+
+                    moves = 0;
+                    setMoves(5000);
+                    while ((myBoard.inGame == true)) {
+                        oneStep(a);
+                        moves++;
+                        if (moves > maxMoves) {
+                            myBoard.inGame = false;
+                        }
+                    }
+
+                    individuals.get(a).setScore(myBoard.getScore());
+                    individuals.get(a).setMovesToScore(myBoard.movesTo2ndLast);
+                    individuals.get(a).Fitness();
+                }
+
+                int totalscore = 0;
+                for (int k = 0; k < 100; k++) {
+                    totalscore += individuals.get(k).score;
+                }
+                generationScores.add((double) totalscore);
+
+                System.out.println("gen " + xCurrent + " total " + totalscore);
+
+                LinkedList<AI> newGen = new LinkedList<AI>();
+                for (int i = 0; i < 100; i++) {
+                    for (int j = 0; j < 100; j++) {
+                        rollDice(individuals.get(j));
+                    }
+                    Collections.sort(individuals);
+                    AI indiv1 = individuals.get(0);
+                    AI indiv2 = individuals.get(1);
+                    newIndiv = new AI();
+                    newIndiv.initialize();
+                    newIndiv.crossover(newIndiv, indiv1, indiv2, newGen);
+                }
+
+                indivMissing = 100 - newGen.size();
+                for (int i = 0; i < indivMissing; i++) {
+                    AI individual = new AI();
+                    individual.initialize();
+                    newGen.add(individual);
+                }
+
+                individuals = newGen;
+
+                if (xCurrent == (xMax - 1)) {
 			/*AI best = individuals.get(0);
 			int bestScore = individuals.get(0).score;
 			for (int i=1;i<100;i++){
@@ -204,21 +206,21 @@ individual.setInput(myBoard.snake.getSnakeY(0)* 10 + myBoard.snake.getSnakeX(0),
 				}
 			}*/
 
-			Double Qgen = 0.0;
-			int correct =0;
-			ArrayList<Double>excelScores;
-			excelScores = new ArrayList<Double>();
-			for (int e=1;e<11;e++){
-				if (e>=2){
-					correct = 1;
-				}
-				for (int f=(e-1)*anzahl-correct;f<e*anzahl;f++){
-					Qgen = Qgen+generationScores.get(f);
-				}
-				Qgen = Qgen/anzahl;
-				excelScores.add(Qgen);
-				Qgen = 0.0;
-			}
+                    Double Qgen = 0.0;
+                    int correct = 0;
+                    ArrayList<Double> excelScores;
+                    excelScores = new ArrayList<Double>();
+                    for (int e = 1; e < 11; e++) {
+                        if (e >= 2) {
+                            correct = 1;
+                        }
+                        for (int f = (e - 1) * anzahl - correct; f < e * anzahl; f++) {
+                            Qgen = Qgen + generationScores.get(f);
+                        }
+                        Qgen = Qgen / anzahl;
+                        excelScores.add(Qgen);
+                        Qgen = 0.0;
+                    }
 
 			
 			/*ArrayList<Double>Numbers;
@@ -245,26 +247,26 @@ individual.setInput(myBoard.snake.getSnakeY(0)* 10 + myBoard.snake.getSnakeX(0),
 			} catch (IOException e) {
 				e.printStackTrace();
 			}*/
-			try{
-				GameCopy.write(t+" xcel (100_10*10)", excelScores);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	} 
-		xCurrent=0;
-}
-		ArrayList<Double>aiConst;
-		aiConst = new ArrayList<Double>();
-		aiConst.add(individual.uniformRate);
-		aiConst.add(individual.crossoverProb);
-		aiConst.add(individual.mutationConst);
-		aiConst.add(individual.mutationRate);
-		
-		try{
-			GameCopy.write("Constants for AI", aiConst);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	} 
+                    try {
+                        GameCopy.write(t + " xcel (100_10*10)", excelScores);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            xCurrent = 0;
+        }
+        ArrayList<Double> aiConst;
+        aiConst = new ArrayList<Double>();
+        aiConst.add(individual.uniformRate);
+        aiConst.add(individual.crossoverProb);
+        aiConst.add(individual.mutationConst);
+        aiConst.add(individual.mutationRate);
+
+        try {
+            GameCopy.write("Constants for AI", aiConst);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
