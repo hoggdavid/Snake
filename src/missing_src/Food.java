@@ -2,7 +2,7 @@ package missing_src;
 
 public class Food {
 
-	public void createPattern(){
+    public void createPattern() {
 	
 		/*patternX = new int[game.getMaxMoves()];
 		patternY = new int[game.getMaxMoves()];
@@ -16,5 +16,5 @@ public class Food {
 			addPattern(patternY, locationY, loop);
 			//patternY[loop] = locationY;
 		}		old code from snakecopy2/Food	*/
-	}
+    }
 }

@@ -1,19 +1,19 @@
 package missing_src;
 
 public class GameCopy_Oldcode {
-	
+
     //public static int identical;
-	
-	public void getTotalscore (int generation){
-		// not yet used for optimizing mutationConst
-	}
-	
-	public void letPlay(int u){
-		//select safed AI out of files
-		//new class for letting an safed AI play
-	}
-	
-	//after board myboard new board
+
+    public void getTotalscore(int generation) {
+        // not yet used for optimizing mutationConst
+    }
+
+    public void letPlay(int u) {
+        //select safed AI out of files
+        //new class for letting an safed AI play
+    }
+
+    //after board myboard new board
 	
 	/*	G R A F I K
     EventQueue.invokeLater(new Runnable() {
@@ -23,17 +23,17 @@ public class GameCopy_Oldcode {
             frame.setVisible(true);
         }
     });*/
-	
 
-	GameCopy_Oldcode() { // actually "GameCopy()"
-	    // G R A F I K
-		//myBoard = new Board();
+
+    GameCopy_Oldcode() { // actually "GameCopy()"
+        // G R A F I K
+        //myBoard = new Board();
 	    /*setResizable(false);
 	    pack();
 	    setTitle("Snake");
 	    setLocationRelativeTo(null);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);*/
-	}
+    }
 	
 	/*for (int o=0;o<14;o++){
 		newGen.add(individuals.get(o));
